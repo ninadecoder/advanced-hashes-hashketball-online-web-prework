@@ -152,16 +152,9 @@ def team_colors(name)
 end
  
 def team_names
-  hash = game_hash
-  array = []
-  hash.each do |location, attributes|
-    attributes.each do |attribute, info|
-      if attribute == :team_name
-        array << info
-      end
-    end
+  game_hash.collect do |location, team_data|
+    team_data[:team_name]
   end
-  return array
 end
 
 
