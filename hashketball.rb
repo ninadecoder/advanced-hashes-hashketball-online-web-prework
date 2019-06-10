@@ -158,11 +158,16 @@ def team_colors(team_name)
 end
  
 def team_names
-	team_names = []
-	game_hash.each do |location, loc_data|
-		team_names << loc_data[:team_name]
-	end
-	team_names
+  hash = game_hash
+  array = []
+  hash.each do |location, attributes|
+    attributes.each do |attribute, info|
+      if attribute == :team_name
+        array << info
+      end
+    end
+  end
+  return array
 end
 
 
