@@ -143,11 +143,16 @@ def shoe_size(name)
    shoe
  end
 
-def team_colors_for(team, game)
-  game.each do |team_name, team_info|
-    if team_name.to_s == team
-      tcolors = team_info[:colors].join(" ")
-      puts "The #{team_name}' team colors are #{tcolors}."
+def team_colors(team_name)
+  hash = game_hash
+  array = []
+  hash.each do |location, attributes|
+    if hash[location].values.include?(team_name)
+      attributes.each do |attribute, info|
+        if attribute == :colors
+          return info
+        end
+      end
     end
   end
 end
