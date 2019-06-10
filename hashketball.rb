@@ -161,26 +161,25 @@ def team_names
 end
 
 
-def player_numbers(team)
-  new_array = []
-  if game_hash[:home][:team_name] == team
-    game_hash[:home][:players].each do |name, stats|
-      stats.each do |stat_label, stat_value|
-        if stat_label == :number
-          new_array << stat_value
-        end
-      end
-    end
-  else 
-    game_hash[:away][:players].each do |name, stats|
-      stats.each do |stat_label, stat_value|
-        if stat_label == :number
-          new_array << stat_value
+def player_numbers(team_name)
+  hash = game_hash
+  array = []
+  hash.each do |location, attributes|
+    if hash[location].values.include?(team_name)
+      attributes.each do |attribute, info|
+        if info.class == Hash
+          info.each do |player, stats|
+            stats.each do |stat, int|
+              if stat == :number
+                array << int.to_i
+              end
+            end
+          end
         end
       end
     end
   end
-  new_array
+  return array
 end
 
 def player_stats(player)
